@@ -6,6 +6,27 @@ import RankedList from './components/RankedList'
 import UnrankedList from './components/UnrankedList'
 import SelectedHero from './components/SelectedHero'
 
+describe('The App', () => {
+  it('Contains a SelectedHero component when there is a state value for selected')
+  it('Contains SelectedHero component at mouse coordinates wsshv')
+  it('Contains SelectedHero component at mouse coordinates on mouse move when there is a state value for selected')
+  it('Does not contain SelectedHero component when there is no value for selected in state')
+  it('Adds selected value to props of ranked list if dropped over ranked list')
+  it('Adds selected value to props in third position when dropped over x y')
+  it('Unsets selected value on mouseup')
+  it('Returns selected value to Unranked list if Selected Hero is not dropped over a slot')
+  it('Returns selected value to Unranked list at original index if not dropped over a slot')
+  it('Removes selected value from Unranked list')
+})
+
+describe('The Ranked List Logic', () => {
+  it('Will place rank 1 item in second slot if new item placed in first slot')
+  it('Will place rank 2 item in first slot, if third slot is full and new item placed in second slot')
+  it('Will remove rank 1 item if second slot is full and new item placed in first slot')
+  it('Will remove rank 4 item is fourth and fifth slots are full and new item placed in fourth slot')
+  it('Will remove rank 5 item if fourth slot is full and new item placed in fifth slot')
+})
+
 describe('The Ranked List', () => {
   const propList = ['Zarya', 'Anub\' Arak', '', 'Sonya']
   const ranked = shallow(<RankedList rankedList={propList}/>)
