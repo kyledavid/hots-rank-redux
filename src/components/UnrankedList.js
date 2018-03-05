@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import SelectedHero from './SelectedHero'
 
 class UnrankedList extends Component {
 	constructor(props) {
@@ -19,12 +20,25 @@ class UnrankedList extends Component {
 	}
 	render() {
 		const {unrankedList} = this.props
-		return (
-			<ul id="unranked-list">
-
-				{unrankedList.map((item, i) => <li key={i} onClick={() => { this.setState({ active: 'butt' }) }}>{item}</li>)}
-			</ul>
+		if (this.state.active) {
+			return (
+			<div>
+				<SelectedHero heroName={this.state.active}/>
+				<ul id="unranked-list">
+					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.setState({ active: 'butt' }) }}>{item}</li>)}
+				</ul>
+			</div>
 		)
+		} else {
+			return (
+			<div>
+				<ul id="unranked-list">
+					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.setState({ active: 'butt' }) }}>{item}</li>)}
+				</ul>
+			</div>
+		)
+		}
+
 	}
 }
 

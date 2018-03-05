@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {shallow} from 'enzyme'
+import {mount, shallow} from 'enzyme'
 import App from './components/App'
 import RankedList from './components/RankedList'
 import UnrankedList from './components/UnrankedList'
@@ -27,7 +27,7 @@ describe('The Ranked List', () => {
 
 describe('The Unranked List', () => {
   const propList = ['Zarya', 'Anub\' Arak', '', 'Sonya']
-  const unranked = shallow(<UnrankedList unrankedList={propList}/>)
+  const unranked = mount(<UnrankedList unrankedList={propList}/>)
 
   it('Contains list with ID of ranked-list', () => {
     expect(unranked.find('ul#unranked-list').exists()).toBe(true)
@@ -51,6 +51,11 @@ describe('The Unranked List', () => {
     unranked.find('li').first().simulate('click')
     expect(unranked.state('active')).toBe('butt')
   })
+
+  it('Creates Selected Hero component when state is active', () => {
+    unranked.setState({ active: 'Zarya' })
+    expect(unranked.find(SelectedHero).text()).toBe('Zarya')
+  })
 })
 
 describe('The Selected Hero', () => {
@@ -68,6 +73,4 @@ describe('The Selected Hero', () => {
   it('Displays the hero name passed in through props', () => {
     expect(selectedHero.find('ul li').text()).toBe(heroName)
   })
-
-  it('')
 })
