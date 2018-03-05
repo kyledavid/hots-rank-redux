@@ -42,6 +42,15 @@ describe('The Unranked List', () => {
       expect(item.text()).toBe(propList[index])
     })
   })
+
+  it('Contains state for active hero that is null by default', () => {
+    expect(unranked.state('active')).toBe(null)
+  })
+
+  it('Contains string in its active state on click', () => {
+    unranked.find('li').first().simulate('click')
+    expect(unranked.state('active')).toBe('butt')
+  })
 })
 
 describe('The Selected Hero', () => {
@@ -59,4 +68,6 @@ describe('The Selected Hero', () => {
   it('Displays the hero name passed in through props', () => {
     expect(selectedHero.find('ul li').text()).toBe(heroName)
   })
+
+  it('')
 })
