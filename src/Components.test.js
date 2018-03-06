@@ -17,22 +17,25 @@ describe('The App', () => {
     app.setState({selected: null})
     expect(app.find(SelectedHero).length).toBe(0)
   })
-  it('Contains SelectedHero component at mouse coordinates wsshv', () => {
+  it('Coordinates for SelectedHero update on mouse move', () => {
     app.setState({selected: 'Zarya'})
-    app.find('div').first().simulate('mousemove', {
+    app.find('#canvas').simulate('mousemove', {
       clientX: 42,
       clientY: 44,
     })
     expect(app.state('xCoord')).toBe(42)
     expect(app.state('yCoord')).toBe(44)
   })
-  it('Contains SelectedHero component at mouse coordinates on mouse move when there is a state value for selected')
+  it('Unsets selected value on mouseup', () => {
+    app.setState({selected: 'Zarya'})
+    app.find('#canvas').simulate('mouseup')
+    expect(app.state('selected')).toBeNull()
+  })
   it('Adds selected value to props of ranked list if dropped over ranked list')
   it('Adds selected value to props in third position when dropped over x y')
-  it('Unsets selected value on mouseup')
   it('Returns selected value to Unranked list if Selected Hero is not dropped over a slot')
   it('Returns selected value to Unranked list at original index if not dropped over a slot')
-  it('Removes selected value from Unranked list')
+  it('Removes selected value from Unranked list when dropped in Ranked List')
 })
 
 describe('The Ranked List Logic', () => {
