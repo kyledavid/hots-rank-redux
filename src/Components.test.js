@@ -5,6 +5,8 @@ import App from './components/App'
 import RankedList from './components/RankedList'
 import UnrankedList from './components/UnrankedList'
 import SelectedHero from './components/SelectedHero'
+import { findPosition } from './utils/checkCoordinates'
+import listPositions from './utils/listPositions'
 
 describe('The App', () => {
   const app = mount(<App />)
@@ -39,6 +41,14 @@ describe('The App', () => {
 })
 
 describe('The Ranked List Logic', () => {
+  const listX = listPositions.x
+  const listY = listPositions.y
+  it('Will place item in list if x and y coordinates within range', () => {
+    expect(findPosition(listX['low'],listY['1']['low'])).toBeTruthy()
+  })
+  it('Will place new item in third slot if given the appropriate coordinates', () => {
+    expect(findPosition(listX['low'],listY['3']['low'])).toBe(3)
+  })
   it('Will place rank 1 item in second slot if new item placed in first slot')
   it('Will place rank 2 item in first slot, if third slot is full and new item placed in second slot')
   it('Will remove rank 1 item if second slot is full and new item placed in first slot')

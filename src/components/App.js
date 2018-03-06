@@ -3,7 +3,9 @@ import Header from './Header'
 import RankedList from './RankedList'
 import SelectedHero from './SelectedHero'
 import UnrankedList from './UnrankedList'
-import heroList from '../utils/heroList.js'
+import heroList from '../utils/heroList'
+import listPositions from '../utils/listPositions.json'
+import {checker} from '../utils/checkCoordinates'
 
 import '../css/App.css'
 
