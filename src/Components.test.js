@@ -7,10 +7,26 @@ import UnrankedList from './components/UnrankedList'
 import SelectedHero from './components/SelectedHero'
 
 describe('The App', () => {
-  it('Contains a SelectedHero component when there is a state value for selected')
-  it('Contains SelectedHero component at mouse coordinates wsshv')
+  const app = mount(<App />)
+
+  it('Contains a SelectedHero component when there is a state value for selected', () => {
+    app.setState({selected: 'Zarya'})
+    expect(app.find(SelectedHero).text()).toBe('Zarya')
+  })
+  it('Does not contain SelectedHero component when there is no value for selected in state', () => {
+    app.setState({selected: null})
+    expect(app.find(SelectedHero).length).toBe(0)
+  })
+  it('Contains SelectedHero component at mouse coordinates wsshv', () => {
+    app.setState({selected: 'Zarya'})
+    app.find('div').first().simulate('mousemove', {
+      clientX: 42,
+      clientY: 44,
+    })
+    expect(app.state('xCoord')).toBe(42)
+    expect(app.state('yCoord')).toBe(44)
+  })
   it('Contains SelectedHero component at mouse coordinates on mouse move when there is a state value for selected')
-  it('Does not contain SelectedHero component when there is no value for selected in state')
   it('Adds selected value to props of ranked list if dropped over ranked list')
   it('Adds selected value to props in third position when dropped over x y')
   it('Unsets selected value on mouseup')
