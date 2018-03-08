@@ -5,8 +5,9 @@ import App from './components/App'
 import RankedList from './components/RankedList'
 import UnrankedList from './components/UnrankedList'
 import SelectedHero from './components/SelectedHero'
-import { addToList, findPosition } from './utils/checkCoordinates'
+import { addToList, findPosition, filterUnrankedList } from './utils/helperFunctions'
 import listPositions from './utils/listPositions'
+import heroList from '../utils/heroList'
 
 
 describe('The App', () => {
@@ -42,6 +43,15 @@ describe('The App', () => {
   it('Returns selected value to Unranked list if Selected Hero is not dropped over a slot')
   it('Returns selected value to Unranked list at original index if not dropped over a slot')
   it('Removes selected value from Unranked list when dropped in Ranked List')
+})
+
+describe('The Filter Unranked List Function', () => {
+  it('Will remove the ranked items from the unranked list', () => {
+
+  })
+  it('Will leave blank spots for the removed items', () => {
+
+  })
 })
 
 describe('The Ranked List Logic', () => {
@@ -122,6 +132,13 @@ describe('The Unranked List', () => {
     const unranked = wrapper.find(UnrankedList)
     unranked.find('li').first().simulate('click')
     expect(wrapper.state('selected')).toBe('Zarya')
+  })
+
+  it('Removes clicked item from list', () => {
+    const wrapper = mount(<App />)
+    const unranked = wrapper.find(UnrankedList)
+    unranked.find('li').first().simulate('click')
+    expect(unranked.find('li').first().text()).toBeUndefined()
   })
 
   /*it('Contains state for active hero that is null by default', () => {

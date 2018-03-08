@@ -5,7 +5,7 @@ import SelectedHero from './SelectedHero'
 import UnrankedList from './UnrankedList'
 import heroList from '../utils/heroList'
 import listPositions from '../utils/listPositions.json'
-import {checker} from '../utils/checkCoordinates'
+import { addToList, findPosition, filterUnrankedList } from '../utils/helperFunctions'
 
 import '../css/App.css'
 
