@@ -16,7 +16,6 @@ class App extends Component {
     this.state = {
       rankedList: [],
       selected: null,
-      unrankedList: heroList,
       xCoord: null,
       yCoord: null,
     }
@@ -47,18 +46,22 @@ class App extends Component {
     })
   }
   render() {
+    const unrankedList = filterUnrankedList(heroList, this.state.rankedList)
+    console.log(unrankedList)
+
+
     return this.state.selected ? (
 			<div id="canvas" onMouseMove={this.handleMove}
         onMouseUp={this.handleMouseUp}
         >
 				<Header />
-	      <UnrankedList unrankedList={this.state.unrankedList} handleClick={this.handleUnrankedClick} />
+	      <UnrankedList unrankedList={heroList} handleClick={this.handleUnrankedClick} />
 				<SelectedHero heroName={this.state.selected} />
 				<RankedList rankedList={this.state.rankedList} />
 			</div>
     ) : <div id="canvas">
       <Header />
-      <UnrankedList unrankedList={this.state.unrankedList} handleClick={this.handleUnrankedClick} />
+      <UnrankedList unrankedList={unrankedList} handleClick={this.handleUnrankedClick} />
       <RankedList rankedList={this.state.rankedList} />
     </div>
   }

@@ -44,7 +44,10 @@ export const addToList = (list, item, spot) => {
 }
 
 export const filterUnrankedList = (unrankedList, rankedList) => {
+
   const newList = unrankedList.map(x => {
-    return rankedList.find(x) ? null : x
+    return rankedList.find(y => x === y) ? null : x
   })
+
+  return rankedList ? newList : unrankedList
 }
