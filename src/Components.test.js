@@ -36,6 +36,7 @@ describe('The App', () => {
     app.find('#canvas').simulate('mouseup')
     expect(app.state('selected')).toBeNull()
   })
+  it('Does not have the same hero in the ranked and unranked list at the same time')
   it('Adds selected value to props of ranked list if dropped over ranked list')
   it('Adds selected value to props in third position when dropped over x y')
   it('Returns selected value to Unranked list if Selected Hero is not dropped over a slot')
@@ -100,7 +101,7 @@ describe('The Ranked List', () => {
 
 describe('The Unranked List', () => {
   const propList = ['Zarya', 'Anub\' Arak', '', 'Sonya']
-  const unranked = mount(<UnrankedList unrankedList={propList}/>)
+  const unranked = mount(<UnrankedList unrankedList={propList} handleClick={() => {}}/>)
 
   it('Contains list with ID of ranked-list', () => {
     expect(unranked.find('ul#unranked-list').exists()).toBe(true)
@@ -116,19 +117,26 @@ describe('The Unranked List', () => {
     })
   })
 
-  it('Contains state for active hero that is null by default', () => {
-    expect(unranked.state('active')).toBe(null)
-  })
-
-  it('Contains string in its active state on click', () => {
+  it('Sets selected state for app when list item is clicked', () => {
+    const wrapper = mount(<App />)
+    const unranked = wrapper.find(UnrankedList)
     unranked.find('li').first().simulate('click')
-    expect(unranked.state('active')).toBe('butt')
+    expect(wrapper.state('selected')).toBe('Zarya')
   })
 
-  it('Creates Selected Hero component when state is active', () => {
+  /*it('Contains state for active hero that is null by default', () => {
+    expect(unranked.state('active')).toBe(null)
+  })*/
+
+  /*it('Contains string in its active state on click', () => {
+    unranked.find('li').first().simulate('click')
+    expect(unranked.state('active')).toBe('Zarya')
+  })*/
+
+  /*it('Creates Selected Hero component when state is active', () => {
     unranked.setState({ active: 'Zarya' })
     expect(unranked.find(SelectedHero).text()).toBe('Zarya')
-  })
+  })*/
 })
 
 describe('The Selected Hero', () => {
@@ -146,4 +154,5 @@ describe('The Selected Hero', () => {
   it('Displays the hero name passed in through props', () => {
     expect(selectedHero.find('ul li').text()).toBe(heroName)
   })
+  it('Is located in the window at its x and y props')
 })

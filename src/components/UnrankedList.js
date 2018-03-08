@@ -9,14 +9,6 @@ class UnrankedList extends Component {
 		this.state = {
 			active: null,
 		}
-
-		this.handleClick = this.handleClick.bind(this)
-	}
-
-	handleClick() {
-		this.setState({
-			active: 'poop',
-		})
 	}
 	render() {
 		const {unrankedList} = this.props
@@ -25,7 +17,7 @@ class UnrankedList extends Component {
 			<div>
 				<SelectedHero heroName={this.state.active}/>
 				<ul id="unranked-list">
-					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.setState({ active: 'butt' }) }}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.props.handleClick(item) }}>{item}</li>)}
 				</ul>
 			</div>
 		)
@@ -33,7 +25,7 @@ class UnrankedList extends Component {
 			return (
 			<div>
 				<ul id="unranked-list">
-					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.setState({ active: 'butt' }) }}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.props.handleClick(item) }}>{item}</li>)}
 				</ul>
 			</div>
 		)
@@ -43,7 +35,8 @@ class UnrankedList extends Component {
 }
 
 UnrankedList.propTypes = {
-	unrankedList: PropTypes.array.isRequired
+	unrankedList: PropTypes.array.isRequired,
+	handleClick: PropTypes.func.isRequired
 }
 
 export default UnrankedList

@@ -23,6 +23,7 @@ class App extends Component {
 
     this.handleMove = this.handleMove.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
+    this.handleUnrankedClick = this.handleUnrankedClick.bind(this)
   }
   componentDidMount() {
     window.addEventListener('mouseup', this.handleMouseUp)
@@ -40,19 +41,24 @@ class App extends Component {
       yCoord: y
     })
   }
+  handleUnrankedClick(selected) {
+    this.setState({
+      selected
+    })
+  }
   render() {
     return this.state.selected ? (
 			<div id="canvas" onMouseMove={this.handleMove}
         onMouseUp={this.handleMouseUp}
         >
 				<Header />
-	      <UnrankedList unrankedList={this.state.unrankedList} />
+	      <UnrankedList unrankedList={this.state.unrankedList} handleClick={this.handleUnrankedClick} />
 				<SelectedHero heroName={this.state.selected} />
 				<RankedList rankedList={this.state.rankedList} />
 			</div>
-    ) : <div id="canvas" onClick={ () => {console.log('i raq')} }>
+    ) : <div id="canvas">
       <Header />
-      <UnrankedList unrankedList={this.state.unrankedList} />
+      <UnrankedList unrankedList={this.state.unrankedList} handleClick={this.handleUnrankedClick} />
       <RankedList rankedList={this.state.rankedList} />
     </div>
   }
