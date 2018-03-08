@@ -21,7 +21,6 @@ export const findPosition = (x,y) => {
 }
 
 export const addToList = (list, item, spot) => {
-  console.log('sup')
   const index = spot - 1
   if (!list[index]) {
     let newList = list.map(x => x)
