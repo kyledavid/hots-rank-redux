@@ -11,33 +11,37 @@ import heroList from './utils/heroList'
 
 
 describe('The App', () => {
-  const app = mount(<App />)
+  const wrapper = mount(<App />)
   const listX = listPositions.x
   const listY = listPositions.y
 
   it('Contains a SelectedHero component when there is a state value for selected', () => {
-    app.setState({selected: 'Zarya'})
-    expect(app.find(SelectedHero).text()).toBe('Zarya')
+    wrapper.setState({selected: 'Zarya'})
+    expect(wrapper.find(SelectedHero).text()).toBe('Zarya')
   })
   it('Does not contain SelectedHero component when there is no value for selected in state', () => {
-    app.setState({selected: null})
-    expect(app.find(SelectedHero).length).toBe(0)
+    wrapper.setState({selected: null})
+    expect(wrapper.find(SelectedHero).length).toBe(0)
   })
   it('Coordinates for SelectedHero update on mouse move', () => {
-    app.setState({selected: 'Zarya'})
-    app.find('#canvas').simulate('mousemove', {
+    wrapper.setState({selected: 'Zarya'})
+    wrapper.find('#canvas').simulate('mousemove', {
       clientX: 42,
       clientY: 44,
     })
-    expect(app.state('xCoord')).toBe(42)
-    expect(app.state('yCoord')).toBe(44)
+    expect(wrapper.state('xCoord')).toBe(42)
+    expect(wrapper.state('yCoord')).toBe(44)
   })
   it('Unsets selected value on mouseup', () => {
-    app.setState({selected: 'Zarya'})
-    app.find('#canvas').simulate('mouseup')
-    expect(app.state('selected')).toBeNull()
+    wrapper.setState({selected: 'Zarya'})
+    wrapper.find('#canvas').simulate('mouseup')
+    expect(wrapper.state('selected')).toBeNull()
   })
-  it('Does not have the same hero in the ranked and unranked list at the same time')
+  it('Does not have the same hero in the ranked and unranked list at the same time', () => {
+    const unranked = wrapper.find(UnrankedList)
+    wrapper.setState({rankedList: ['Zarya']})
+    expect(unranked.prop('unrankedList').indexOf('Zarya')).toBe(0)
+  })
   it('Adds selected value to props of ranked list if dropped over ranked list')
   it('Adds selected value to props in third position when dropped over x y')
   it('Returns selected value to Unranked list if Selected Hero is not dropped over a slot')
@@ -140,7 +144,7 @@ describe('The Unranked List', () => {
     expect(wrapper.state('selected')).toBe('Zarya')
   })
 
-  it.only('Removes ranked items from list with null in their spots', () => {
+  it('Removes ranked items from list with null in their spots', () => {
     const wrapper = mount(<App />)
     const unranked = wrapper.find(UnrankedList)
     wrapper.setState({rankedList: ['Zarya', 'Sonya']})
