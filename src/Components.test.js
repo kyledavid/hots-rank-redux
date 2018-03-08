@@ -5,8 +5,9 @@ import App from './components/App'
 import RankedList from './components/RankedList'
 import UnrankedList from './components/UnrankedList'
 import SelectedHero from './components/SelectedHero'
-import { findPosition } from './utils/checkCoordinates'
+import { addToList, findPosition } from './utils/checkCoordinates'
 import listPositions from './utils/listPositions'
+
 
 describe('The App', () => {
   const app = mount(<App />)
@@ -49,11 +50,26 @@ describe('The Ranked List Logic', () => {
   it('Will place new item in third slot if given the appropriate coordinates', () => {
     expect(findPosition(listX['low'],listY['3']['low'])).toBe(3)
   })
-  it('Will place rank 1 item in second slot if new item placed in first slot')
-  it('Will place rank 2 item in first slot, if third slot is full and new item placed in second slot')
-  it('Will remove rank 1 item if second slot is full and new item placed in first slot')
-  it('Will remove rank 4 item is fourth and fifth slots are full and new item placed in fourth slot')
-  it('Will remove rank 5 item if fourth slot is full and new item placed in fifth slot')
+  it('Will place rank 1 item in second slot if new item placed in first slot', () => {
+    const list = ['zarya', null, 'edgar']
+    expect(addToList(list, 'sonya', 1)[1]).toBe('zarya')
+  })
+  it('Will place rank 2 item in first slot, if third slot is full and new item placed in second slot', () => {
+    const list = [null, 'zarya', 'edgar']
+    expect(addToList(list, 'sonya', 2)[0]).toBe('zarya')
+  })
+  it('Will remove rank 1 item if second slot is full and new item placed in first slot', () => {
+    const list = ['zarya', 'edgar']
+    expect(addToList(list, 'sonya', 1)[0]).toBe('sonya')
+  })
+  it('Will remove rank 4 item is fourth and fifth slots are full and new item placed in fourth slot', () => {
+    const list = ['zarya', 'edgar', 'anub', 'skeleton king', 'diablo']
+    expect(addToList(list, 'sonya', 4)[3]).toBe('sonya')
+  })
+  it('Will remove rank 5 item if fourth slot is full and new item placed in fifth slot', () => {
+    const list = ['zarya', 'edgar', 'anub', 'skeleton king', 'diablo']
+    expect(addToList(list, 'sonya', 5)[4]).toBe('sonya')
+  })
 })
 
 describe('The Ranked List', () => {
