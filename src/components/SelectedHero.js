@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {SelHero} from './styled'
 
 const selectedHero = ({heroName, xCoord, yCoord}) => {
   const compStyle = {
@@ -8,7 +9,7 @@ const selectedHero = ({heroName, xCoord, yCoord}) => {
     position: 'absolute',
   }
   return (
-    <ul id="selected-hero" style={compStyle}><li>{heroName}</li></ul>
+    <SelHero style={compStyle}><li>{heroName}</li></SelHero>
   )
 }
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import SelectedHero from './SelectedHero'
+import {UList, Title} from './styled'
 
 class UnrankedList extends Component {
 	constructor(props) {
@@ -15,18 +16,20 @@ class UnrankedList extends Component {
 		if (this.state.active) {
 			return (
 			<div>
+				<Title>I'm a title</Title>
 				<SelectedHero heroName={this.state.active}/>
-				<ul id="unranked-list">
+				<UList>
 					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.props.handleClick(item) }}>{item}</li>)}
-				</ul>
+				</UList>
 			</div>
 		)
 		} else {
 			return (
 			<div>
-				<ul id="unranked-list">
+				<Title>I'm a title</Title>
+				<UList>
 					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.props.handleClick(item) }}>{item}</li>)}
-				</ul>
+				</UList>
 			</div>
 		)
 		}

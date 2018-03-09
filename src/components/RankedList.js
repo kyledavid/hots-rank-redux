@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {RList} from './styled'
 
 class RankedList extends React.Component {
 	render() {
 		const {rankedList} = this.props
 		return (
 			<div>
-				<ul id="ranked-list">
+				<RList>
 					{rankedList.map((item, i) => <li key={i}>{item}</li>)}
-				</ul>
+				</RList>
 			</div>
 		)
 	}
