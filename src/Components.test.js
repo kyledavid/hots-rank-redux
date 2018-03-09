@@ -169,7 +169,7 @@ describe('The Unranked List', () => {
 
 describe('The Selected Hero', () => {
   const heroName = 'Sonya'
-  const selectedHero = shallow(<SelectedHero heroName={heroName}/>)
+  const selectedHero = shallow(<SelectedHero heroName={heroName} xCoord={1} yCoord={1}/>)
 
   it('Contains list with ID of selected-hero', () => {
     expect(selectedHero.find('ul#selected-hero').exists()).toBe(true)

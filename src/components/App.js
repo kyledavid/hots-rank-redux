@@ -56,7 +56,7 @@ class App extends Component {
         >
 				<Header />
 	      <UnrankedList unrankedList={heroList} handleClick={this.handleUnrankedClick} />
-				<SelectedHero heroName={this.state.selected} />
+				<SelectedHero heroName={this.state.selected} xCoord={this.state.xCoord} yCoord={this.state.yCoord}/>
 				<RankedList rankedList={this.state.rankedList} />
 			</div>
     ) : <div id="canvas">
