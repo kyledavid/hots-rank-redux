@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Coordinates from './Coordinates'
 import Header from './Header'
 import RankedList from './RankedList'
 import SelectedHero from './SelectedHero'
@@ -55,8 +56,9 @@ class App extends Component {
         onMouseUp={this.handleMouseUp}
         >
 				<Header />
+        <Coordinates xCoord={this.state.xCoord} yCoord={this.state.yCoord} />
 	      <UnrankedList unrankedList={heroList} handleClick={this.handleUnrankedClick} />
-				<SelectedHero heroName={this.state.selected} xCoord={this.state.xCoord} yCoord={this.state.yCoord}/>
+				<SelectedHero heroName={this.state.selected} xCoord={this.state.xCoord} yCoord={this.state.yCoord} />
 				<RankedList rankedList={this.state.rankedList} />
 			</div>
     ) : <div id="canvas">

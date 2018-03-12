@@ -1,3 +1,6 @@
 import React from 'react'
 
-export default () => <h1>Rank the tanks of Heroes of the Storm</h1>
+const style = {
+  marginTop: 0,
+}
+export default () => <h1 style={style}>Rank the tanks of Heroes of the Storm</h1>

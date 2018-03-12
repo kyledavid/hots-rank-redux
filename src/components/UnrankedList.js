@@ -16,19 +16,17 @@ class UnrankedList extends Component {
 		if (this.state.active) {
 			return (
 			<div>
-				<Title>I'm a title</Title>
 				<SelectedHero heroName={this.state.active}/>
 				<UList>
-					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.props.handleClick(item) }}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onMouseDown={() => { this.props.handleClick(item) }}>{item}</li>)}
 				</UList>
 			</div>
 		)
 		} else {
 			return (
 			<div>
-				<Title>I'm a title</Title>
 				<UList>
-					{unrankedList.map((item, i) => <li key={i} onClick={() => { this.props.handleClick(item) }}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onMouseDown={() => { this.props.handleClick(item) }}>{item}</li>)}
 				</UList>
 			</div>
 		)

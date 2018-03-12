@@ -7,6 +7,7 @@ const selectedHero = ({heroName, xCoord, yCoord}) => {
     top: yCoord,
     left: xCoord,
     position: 'absolute',
+    transform: 'translateY(-100%)',
   }
   return (
     <SelHero style={compStyle}><li>{heroName}</li></SelHero>
