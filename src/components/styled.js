@@ -8,10 +8,14 @@ left: 100px;
 `
 
 export const RList = styled.ul`
-border: 1px solid red;
+width: 200px;
 position: absolute;
-top: 100px;
 left: 300px;
+top: 100px;
+li {
+  border: 1px solid red;
+  padding: 10px;
+}
 `
 export const Title = styled.h1`
 color: red;

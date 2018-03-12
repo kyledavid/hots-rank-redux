@@ -3,8 +3,10 @@ import listPositions from './listPositions.json'
 export const findPosition = (x,y) => {
   const listX = listPositions.x
   const listY = listPositions.y
+  console.log(y)
   if (x >= listX.low && x <= listX.high) {
     if (y >= listY['1'].low && y <= listY['1'].high) {
+      console.log('iraq')
       return 1
     } else if (y >= listY['2'].low && y <= listY['2'].high) {
       return 2

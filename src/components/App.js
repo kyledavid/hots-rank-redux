@@ -32,6 +32,14 @@ class App extends Component {
     this.setState({
       selected: null
     })
+    const position = findPosition(this.state.xCoord, this.state.yCoord)
+    if(position) {
+      const newRankedList = addToList(this.state.rankedList, this.state.selected, position - 1)
+      this.setState({
+        rankedList: newRankedList
+      })
+    }
+
   }
   handleMove(e) {
     const x = e.clientX
@@ -48,8 +56,6 @@ class App extends Component {
   }
   render() {
     const unrankedList = filterUnrankedList(heroList, this.state.rankedList)
-    console.log(unrankedList)
-
 
     return this.state.selected ? (
 			<div id="canvas" onMouseMove={this.handleMove}
