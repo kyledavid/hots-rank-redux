@@ -6,8 +6,8 @@ class RankedList extends React.Component {
 	makeList() {
 		const {rankedList} = this.props
 		let list = []
-
-		for(let i = 0; i <= 5; i++) {
+		console.log(rankedList)
+		for(let i = 0; i <= 4; i++) {
 			list[i] = rankedList[i] ? rankedList[i] : null
 		}
 

@@ -15,7 +15,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      rankedList: [],
+      rankedList: [null, null, null, null, null],
       selected: null,
       xCoord: null,
       yCoord: null,
@@ -28,13 +28,15 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('mouseup', this.handleMouseUp)
   }
-  handleMouseUp() {
+  handleMouseUp(e) {
+    e.stopPropagation()
     this.setState({
       selected: null
     })
+    console.log('iraqi')
     const position = findPosition(this.state.xCoord, this.state.yCoord)
     if(position) {
-      const newRankedList = addToList(this.state.rankedList, this.state.selected, position - 1)
+      const newRankedList = addToList(this.state.rankedList, this.state.selected, position)
       this.setState({
         rankedList: newRankedList
       })

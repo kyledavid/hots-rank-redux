@@ -3,10 +3,9 @@ import listPositions from './listPositions.json'
 export const findPosition = (x,y) => {
   const listX = listPositions.x
   const listY = listPositions.y
-  console.log(y)
+
   if (x >= listX.low && x <= listX.high) {
     if (y >= listY['1'].low && y <= listY['1'].high) {
-      console.log('iraq')
       return 1
     } else if (y >= listY['2'].low && y <= listY['2'].high) {
       return 2
@@ -26,7 +25,7 @@ export const addToList = (list, item, spot) => {
   const index = spot - 1
   if (!list[index]) {
     let newList = list.map(x => x)
-    newList.splice(index, 0, item)
+    newList.splice(index, 1, item)
     return newList
   } else if(index + 1 < 5 && !list[index + 1]) {
     let newList = list.map(x => x)
@@ -40,7 +39,7 @@ export const addToList = (list, item, spot) => {
     return newList
   } else {
     let newList = list.map(x => x)
-    newList.splice(index, 1, item)
+    newList.splice(index, 0, item)
     return newList
   }
 }
