@@ -13,12 +13,15 @@ class RankedList extends React.Component {
 
 		return list.map((item, i) => <li key={i} onMouseDown={this.handleClick.bind(this)}>{item}</li>)
 	}
+
 	handleClick(e) {
 		const hero = e.target.innerText
+		const yCoord = e.clientY
+		const xCoord = e.clientX
 		const {handleRankedClick} = this.props
 
 		if(hero) {
-			handleRankedClick(hero)
+			handleRankedClick(hero, xCoord, yCoord)
 		}
 	}
 	render() {

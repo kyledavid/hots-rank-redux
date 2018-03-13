@@ -11,6 +11,17 @@ class UnrankedList extends Component {
 			active: null,
 		}
 	}
+	handleClick(e) {
+		const hero = e.target.innerText
+		const yCoord = e.clientY
+		const xCoord = e.clientX
+		const handleClick = this.props.handleClick
+
+		if(hero) {
+			handleClick(hero, xCoord, yCoord)
+		}
+
+	}
 	render() {
 		const {unrankedList} = this.props
 		if (this.state.active) {
@@ -18,7 +29,7 @@ class UnrankedList extends Component {
 			<div>
 				<SelectedHero heroName={this.state.active}/>
 				<UList>
-					{unrankedList.map((item, i) => <li key={i} onMouseDown={() => { this.props.handleClick(item) }}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onMouseDown={/*this.props.handleClick(e, item)*/ this.handleClick.bind(this)}>{item}</li>)}
 				</UList>
 			</div>
 		)
@@ -26,7 +37,7 @@ class UnrankedList extends Component {
 			return (
 			<div>
 				<UList>
-					{unrankedList.map((item, i) => <li key={i} onMouseDown={() => { this.props.handleClick(item) }}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onMouseDown={this.handleClick.bind(this)}>{item}</li>)}
 				</UList>
 			</div>
 		)

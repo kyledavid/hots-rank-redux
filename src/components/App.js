@@ -54,18 +54,22 @@ class App extends Component {
       yCoord: y
     })
   }
-  handleUnrankedClick(selected) {
+  handleUnrankedClick(selected, xCoord, yCoord) {
     this.setState({
-      selected
+      selected,
+      xCoord,
+      yCoord
     })
   }
-  handleRankedClick(selected) {
+  handleRankedClick(selected, xCoord, yCoord) {
     const currentState = this.state.rankedList
     const newRankedList = currentState.map(x => x !== selected ? x : null)
 
     this.setState({
       selected,
-      rankedList: newRankedList
+      rankedList: newRankedList,
+      xCoord,
+      yCoord
     })
   }
   render() {
