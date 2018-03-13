@@ -26,21 +26,21 @@ export const addToList = (list, item, spot) => {
   if (!list[index]) {
     let newList = list.map(x => x)
     newList.splice(index, 1, item)
-    return newList
+    return newList.slice(0,5)
   } else if(index + 1 < 5 && !list[index + 1]) {
     let newList = list.map(x => x)
     newList.splice(index + 1, 1)
     newList.splice(index, 0, item)
-    return newList
+    return newList.slice(0,5)
   } else if(index - 1 > -1 && !list[index - 1]) {
     let newList = list.map(x => x)
     newList.splice(index -1, 1)
     newList.splice(index, 0, item)
-    return newList
+    return newList.slice(0,5)
   } else {
     let newList = list.map(x => x)
     newList.splice(index, 0, item)
-    return newList
+    return newList.slice(0,5)
   }
 }
 

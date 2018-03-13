@@ -117,6 +117,7 @@ describe('The Ranked List', () => {
       expect(item.text()).toBe(propList[index])
     })
   })
+  it('Adds hero to selected state if clicked in slot with hero')
 })
 
 describe('The Unranked List', () => {

@@ -1,1 +1,1 @@
-export default ['Zarya', 'Anub\' Arak', 'Muradin', 'Sonya']
+export default ['Zarya', 'Anub\' Arak', 'Muradin', 'Sonya', 'Leoric', 'Diablo', 'Chen']
