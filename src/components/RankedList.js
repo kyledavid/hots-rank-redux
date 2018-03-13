@@ -11,7 +11,15 @@ class RankedList extends React.Component {
 			list[i] = rankedList[i] ? rankedList[i] : null
 		}
 
-		return list.map((item, i) => <li key={i}>{item}</li>)
+		return list.map((item, i) => <li key={i} onMouseDown={this.handleClick.bind(this)}>{item}</li>)
+	}
+	handleClick(e) {
+		const hero = e.target.innerText
+		const {handleRankedClick} = this.props
+
+		if(hero) {
+			handleRankedClick(hero)
+		}
 	}
 	render() {
 
@@ -26,7 +34,8 @@ class RankedList extends React.Component {
 }
 
 RankedList.propTypes = {
-	rankedList: PropTypes.array.isRequired
+	rankedList: PropTypes.array.isRequired,
+	handleRankedClick: PropTypes.func.isRequired
 }
 
 export default RankedList

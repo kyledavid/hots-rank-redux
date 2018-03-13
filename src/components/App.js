@@ -24,6 +24,7 @@ class App extends Component {
     this.handleMove = this.handleMove.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleUnrankedClick = this.handleUnrankedClick.bind(this)
+    this.handleRankedClick = this.handleRankedClick.bind(this)
   }
   componentDidMount() {
     window.addEventListener('mouseup', this.handleMouseUp)
@@ -56,6 +57,15 @@ class App extends Component {
       selected
     })
   }
+  handleRankedClick(selected) {
+    const currentState = this.state.rankedList
+    const newRankedList = currentState.map(x => x !== selected ? x : null)
+
+    this.setState({
+      selected,
+      rankedList: newRankedList
+    })
+  }
   render() {
     const unrankedList = filterUnrankedList(heroList, this.state.rankedList)
 
@@ -67,12 +77,12 @@ class App extends Component {
         <Coordinates xCoord={this.state.xCoord} yCoord={this.state.yCoord} />
 	      <UnrankedList unrankedList={unrankedList} handleClick={this.handleUnrankedClick} />
 				<SelectedHero heroName={this.state.selected} xCoord={this.state.xCoord} yCoord={this.state.yCoord} />
-				<RankedList rankedList={this.state.rankedList} />
+				<RankedList rankedList={this.state.rankedList} handleRankedClick={this.handleRankedClick}/>
 			</div>
     ) : <div id="canvas">
       <Header />
       <UnrankedList unrankedList={unrankedList} handleClick={this.handleUnrankedClick} />
-      <RankedList rankedList={this.state.rankedList} />
+      <RankedList rankedList={this.state.rankedList} handleRankedClick={this.handleRankedClick} />
     </div>
   }
 }
