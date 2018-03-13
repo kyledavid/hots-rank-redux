@@ -32,7 +32,9 @@ class App extends Component {
   handleMouseUp(e) {
     e.stopPropagation()
     this.setState({
-      selected: null
+      selected: null,
+      xCoord: null,
+      yCoord: null
     })
     console.log('iraqi')
     const position = findPosition(this.state.xCoord, this.state.yCoord)
@@ -67,7 +69,7 @@ class App extends Component {
     })
   }
   render() {
-    const unrankedList = filterUnrankedList(heroList, this.state.rankedList)
+    const unrankedList = filterUnrankedList(heroList, this.state.rankedList, this.state.selected)
 
     return this.state.selected ? (
 			<div id="canvas" onMouseMove={this.handleMove}
