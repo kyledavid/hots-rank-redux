@@ -29,7 +29,7 @@ class UnrankedList extends Component {
 			<div>
 				<SelectedHero heroName={this.state.active}/>
 				<UList>
-					{unrankedList.map((item, i) => <li key={i} onMouseDown={/*this.props.handleClick(e, item)*/ this.handleClick.bind(this)}>{item}</li>)}
+					{unrankedList.map((item, i) => <li key={i} onMouseDown={this.handleClick.bind(this)}>{item}</li>)}
 				</UList>
 			</div>
 		)

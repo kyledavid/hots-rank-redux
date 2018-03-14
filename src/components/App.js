@@ -26,9 +26,6 @@ class App extends Component {
     this.handleUnrankedClick = this.handleUnrankedClick.bind(this)
     this.handleRankedClick = this.handleRankedClick.bind(this)
   }
-  componentDidMount() {
-    window.addEventListener('mouseup', this.handleMouseUp)
-  }
   handleMouseUp(e) {
     e.stopPropagation()
     this.setState({
@@ -36,7 +33,6 @@ class App extends Component {
       xCoord: null,
       yCoord: null
     })
-    console.log('iraqi')
     const position = findPosition(this.state.xCoord, this.state.yCoord)
     if(position) {
       const newRankedList = addToList(this.state.rankedList, this.state.selected, position)
@@ -80,7 +76,6 @@ class App extends Component {
         onMouseUp={this.handleMouseUp}
         >
 				<Header />
-        <Coordinates xCoord={this.state.xCoord} yCoord={this.state.yCoord} />
 	      <UnrankedList unrankedList={unrankedList} handleClick={this.handleUnrankedClick} />
 				<SelectedHero heroName={this.state.selected} xCoord={this.state.xCoord} yCoord={this.state.yCoord} />
 				<RankedList rankedList={this.state.rankedList} handleRankedClick={this.handleRankedClick}/>
