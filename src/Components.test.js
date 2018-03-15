@@ -16,7 +16,11 @@ describe('The App', () => {
   const listY = listPositions.y
 
   it('Contains a SelectedHero component when there is a state value for selected', () => {
-    wrapper.setState({selected: 'Zarya'})
+    wrapper.setState({
+      selected: 'Zarya',
+      xCoord: 1,
+      yCoord: 1,
+    })
     expect(wrapper.find(SelectedHero).text()).toBe('Zarya')
   })
   it('Does not contain SelectedHero component when there is no value for selected in state', () => {
@@ -24,7 +28,11 @@ describe('The App', () => {
     expect(wrapper.find(SelectedHero).length).toBe(0)
   })
   it('Coordinates for SelectedHero update on mouse move', () => {
-    wrapper.setState({selected: 'Zarya'})
+    wrapper.setState({
+      selected: 'Zarya',
+      xCoord: 1,
+      yCoord: 1,
+  })
     wrapper.find('#canvas').simulate('mousemove', {
       clientX: 42,
       clientY: 44,
@@ -32,8 +40,12 @@ describe('The App', () => {
     expect(wrapper.state('xCoord')).toBe(42)
     expect(wrapper.state('yCoord')).toBe(44)
   })
-  it('Unsets selected value on mouseup', () => {
-    wrapper.setState({selected: 'Zarya'})
+  it.only('Unsets selected value on mouseup', () => {
+    wrapper.setState({
+      selected: 'Zarya',
+      xCoord: 1,
+      yCoord: 1,
+    })
     wrapper.find('#canvas').simulate('mouseup')
     expect(wrapper.state('selected')).toBeNull()
   })
@@ -83,15 +95,15 @@ describe('The Ranked List Logic', () => {
     expect(addToList(list, 'sonya', 2)[0]).toBe('zarya')
     expect(addToList(list, 'sonya', 2)[1]).toBe('sonya')
   })
-  it('Will remove rank 1 item if second slot is full and new item placed in first slot', () => {
+  it('Will bump down rank 2 item if first slot is full and new item placed in first slot', () => {
     const list = ['zarya', 'anub arak']
     expect(addToList(list, 'sonya', 1)[0]).toBe('sonya')
-    expect(addToList(list, 'sonya', 1).find(x => x === 'zarya')).toBeUndefined()
+    expect(addToList(list, 'sonya', 1)[2]).toBe('anub arak')
   })
-  it('Will remove rank 4 item is fourth and fifth slots are full and new item placed in fourth slot', () => {
+  it('Will bump off rank 5 item is fourth and fifth slots are full and new item placed in fourth slot', () => {
     const list = ['zarya', 'anub arak', 'muradin', 'skeleton king', 'diablo']
     expect(addToList(list, 'sonya', 4)[3]).toBe('sonya')
-    expect(addToList(list, 'sonya', 4).find(x => x === 'skeleton king')).toBeUndefined()
+    expect(addToList(list, 'sonya', 4).find(x => x === 'diablo')).toBeUndefined()
   })
   it('Will remove rank 5 item if fourth slot is full and new item placed in fifth slot', () => {
     const list = ['zarya', 'anub arak', 'muradin', 'skeleton king', 'diablo']
@@ -102,14 +114,14 @@ describe('The Ranked List Logic', () => {
 
 describe('The Ranked List', () => {
   const propList = ['Zarya', 'Anub\' Arak', '', 'Sonya']
-  const ranked = shallow(<RankedList rankedList={propList}/>)
+  const ranked = mount(<RankedList rankedList={propList} handleRankedClick={()=>{}}/>)
 
-  it('Contains list with ID of ranked-list', () => {
-    expect(ranked.find('ul#ranked-list').exists()).toBe(true)
+  it('Contains list for ranking heroes', () => {
+    expect(ranked.find('ul').exists()).toBe(true)
   })
 
   it('Contains list items', () => {
-    expect(ranked.find('ul#ranked-list li').exists()).toBe(true)
+    expect(ranked.find('ul li').exists()).toBe(true)
   })
 
   it('List matches order of prop list', () => {
@@ -124,12 +136,12 @@ describe('The Unranked List', () => {
   const propList = ['Zarya', 'Anub\' Arak', '', 'Sonya']
   const unranked = mount(<UnrankedList unrankedList={propList} handleClick={() => {}}/>)
 
-  it('Contains list with ID of ranked-list', () => {
-    expect(unranked.find('ul#unranked-list').exists()).toBe(true)
+  it('Contains list for unranked heroes', () => {
+    expect(unranked.find('ul').exists()).toBe(true)
   })
 
   it('Contains list items', () => {
-    expect(unranked.find('ul#unranked-list li').exists()).toBe(true)
+    expect(unranked.find('ul li').exists()).toBe(true)
   })
 
   it('List matches order of prop list', () => {
@@ -141,7 +153,11 @@ describe('The Unranked List', () => {
   it('Sets selected state for app when list item is clicked', () => {
     const wrapper = mount(<App />)
     const unranked = wrapper.find(UnrankedList)
-    unranked.find('li').first().simulate('click')
+    unranked.find('li').first().simulate('mousedown', {
+      target: {
+        innerText: 'Zarya'
+      }
+    })
     expect(wrapper.state('selected')).toBe('Zarya')
   })
 
@@ -150,30 +166,16 @@ describe('The Unranked List', () => {
     const unranked = wrapper.find(UnrankedList)
     wrapper.setState({rankedList: ['Zarya', 'Sonya']})
     expect(unranked.find('li').first().text()).not.toBe('Zarya')
-    expect(unranked.find('li').slice(3).text()).not.toBe('Sonya')
+    expect(unranked.find('li').slice(2,3).text()).not.toBe('Sonya')
   })
-
-  /*it('Contains state for active hero that is null by default', () => {
-    expect(unranked.state('active')).toBe(null)
-  })*/
-
-  /*it('Contains string in its active state on click', () => {
-    unranked.find('li').first().simulate('click')
-    expect(unranked.state('active')).toBe('Zarya')
-  })*/
-
-  /*it('Creates Selected Hero component when state is active', () => {
-    unranked.setState({ active: 'Zarya' })
-    expect(unranked.find(SelectedHero).text()).toBe('Zarya')
-  })*/
 })
 
 describe('The Selected Hero', () => {
   const heroName = 'Sonya'
-  const selectedHero = shallow(<SelectedHero heroName={heroName} xCoord={1} yCoord={1}/>)
+  const selectedHero = mount(<SelectedHero heroName={heroName} xCoord={1} yCoord={1}/>)
 
   it('Contains list with ID of selected-hero', () => {
-    expect(selectedHero.find('ul#selected-hero').exists()).toBe(true)
+    expect(selectedHero.find('ul').exists()).toBe(true)
   })
 
   it('Displays a hero name', () => {
@@ -181,7 +183,7 @@ describe('The Selected Hero', () => {
   })
 
   it('Displays the hero name passed in through props', () => {
-    expect(selectedHero.find('ul li').text()).toBe(heroName)
+    expect(selectedHero.find('li').text()).toBe(heroName)
   })
   it('Is located in the window at its x and y props')
 })
